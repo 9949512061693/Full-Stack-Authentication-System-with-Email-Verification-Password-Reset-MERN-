@@ -40,7 +40,9 @@ const signup = async (req, res) => {
     await user.save();
 
     await generateTokenAndSetCookie(res, user._id);
+    console.log("📨 About to send email...");
     await sendVerificationEmail(user.email, user.verificationToken);
+    console.log("📨 Email function called");
 
     res.status(200).json({
       status: "success",
